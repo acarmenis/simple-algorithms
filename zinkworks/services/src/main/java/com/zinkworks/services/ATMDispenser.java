@@ -6,20 +6,12 @@ import com.zinkworks.exceptions.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * ATMDispenser
- */
 @Slf4j
 @Service
 public class ATMDispenser {
 
-    // init dispenser
     private IDispense dispenseOfFifties;
 
-    /**
-     * ATMDispenser constructor
-     * sets the following chain of ressponsibilities
-     */
     public ATMDispenser() {
         // initialize the chain
         this.dispenseOfFifties = new FiftyEurosBankNote();
@@ -33,12 +25,6 @@ public class ATMDispenser {
         dispenseOfTens.setNext(dispenseOfFives);
     }
 
-    /**
-     *
-     * @param bankAccountWrapper the BankAccountWrapper
-     * @return
-     * @throws BusinessException
-     */
     public BankAccountWrapper startDispensing(BankAccountWrapper bankAccountWrapper) throws BusinessException {
             // process the request
         BankAccountWrapper transaction = this.dispenseOfFifties.doDispense(bankAccountWrapper);

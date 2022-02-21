@@ -9,6 +9,33 @@ import com.zinkworks.services.IAtmService;
  * IState sets the states action
  */
 public interface IState {
+
+    /**
+     *
+     */
+    void getAction();
+
+    /**
+     *
+     * @param atmClientRequest atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    void getAction(AtmClientRequest atmClientRequest);
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     */
+    void getAction(AtmClientRequest atmClientRequest, IAccountService accountService);
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService);
+
     /**
      *
      * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.

@@ -14,6 +14,40 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class BalanceEnquiryState implements IState {
+
+    /**
+     *
+     */
+    @Override
+    public void getAction() {
+        // logs to console the transaction type and numbers the step/state
+        log.info("Balance State");
+    }
+
+    /**
+     *
+     * @param atmClientRequest atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest) { }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService) {}
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService) {}
+
     /**
      *
      * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
@@ -22,8 +56,5 @@ public class BalanceEnquiryState implements IState {
      * @param atmDispenser the chain responsibility atm design pattern - used for the actual dispensing
      */
     @Override
-    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) {
-        // logs to console the transaction type and numbers the step/state
-        log.info("Balance State");
-    }
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) { }
 }

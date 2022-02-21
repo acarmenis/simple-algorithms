@@ -57,15 +57,15 @@ public class AccountController {
 
         // set stage with step status 1
         context.setTransactionState(enterCashCardState);
-        context.getAction(atmRequest, null, null, null);
+        context.getAction();
 
         // set stage with step status 2
         context.setTransactionState(enterPinState);
-        context.getAction(atmRequest, accountService, atmService, null);
+        context.getAction(atmRequest, accountService);
 
         // set stage with step status 3
         context.setTransactionState(withdrawalState);
-        context.getAction(atmRequest, accountService, atmService, null);
+        context.getAction(atmRequest, accountService);
 
         // set stage with step status 4
         context.setTransactionState(dispenseState);
@@ -73,7 +73,7 @@ public class AccountController {
 
         // set stage with step status 5
         context.setTransactionState(cashCardExportState);
-        context.getAction(atmRequest, null, null, null);
+        context.getAction();
 
         // returns the response code
         return ResponseEntity.ok().build();

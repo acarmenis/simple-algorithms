@@ -15,6 +15,48 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class EnterCashCardState implements IState {
+
+    /**
+     *
+     */
+    @Override
+    public void getAction() {
+        // change a line since it is the very first state/step of the transaction
+        log.info("\n");
+        // logs to console the transaction type and numbers the step/state
+        log.info("1. {}", TransactionType.CARD_ENTER_AT_THE_ATM.getMessage());
+    }
+
+    /**
+     *
+     * @param atmClientRequest atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest) {
+
+    }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService) {
+
+    }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService) {
+
+    }
+
     /**
      *
      * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
@@ -23,10 +65,5 @@ public class EnterCashCardState implements IState {
      * @param atmDispenser the chain responsibility atm design pattern - used for the actual dispensing
      */
     @Override
-    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) {
-        // change a line since it is the very first state/step of the transaction
-        log.info("\n");
-        // logs to console the transaction type and numbers the step/state
-        log.info("1. {}", TransactionType.CARD_ENTER_AT_THE_ATM.getMessage());
-    }
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) { }
 }

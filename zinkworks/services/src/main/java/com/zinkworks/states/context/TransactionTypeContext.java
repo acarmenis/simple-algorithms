@@ -16,8 +16,46 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TransactionTypeContext implements IState {
+
     // the transactionState state
     private IState transactionState;
+
+    /**
+     *
+     */
+    @Override
+    public void getAction() { }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest) {
+        this.transactionState.getAction(atmClientRequest);
+    }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService) {
+        this.transactionState.getAction(atmClientRequest, accountService);
+    }
+
+    /**
+     *
+     * @param atmRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmRequest, IAccountService accountService, IAtmService atmService) {
+        this.transactionState.getAction(atmRequest, accountService, atmService);
+    }
+
     /**
      *
      * @param atmRequest Is the client's request. Encompasses the user's pin and the requested money.

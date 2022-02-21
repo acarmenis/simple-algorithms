@@ -25,15 +25,27 @@ import java.util.Optional;
 @Slf4j
 @Component
 public class WithdrawalState implements IState {
+
+    /**
+     *
+     */
+    @Override
+    public void getAction() { }
+
+    /**
+     *
+     * @param atmClientRequest atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest) {}
+
     /**
      *
      * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
      * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
-     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
-     * @param atmDispenser the chain responsibility atm design pattern - used for the actual dispensing
      */
     @Override
-    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) {
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService) {
         // logs to console the transaction type and numbers the step/state
         log.info("3. {}", TransactionType.WITHDRAWAL.getMessage());
         // logs to console the client's requested money
@@ -59,4 +71,23 @@ public class WithdrawalState implements IState {
         // logs in case client's requested money Overdrafts his/her balance account Overdraft restriction with the actual Overdraft amount
         ErrorLog.logExtraInfoError(((optionalAccount.get().getOverDraft()<requestedMoney)), ErrorType.EXCEEDED_ISSUER_LIMIT, HttpStatus.BAD_REQUEST, String.valueOf(optionalAccount.get().getOverDraft()).concat("€."));
     }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService) { }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     * @param atmDispenser the chain responsibility atm design pattern - used for the actual dispensing
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService, ATMDispenser atmDispenser) { }
 }

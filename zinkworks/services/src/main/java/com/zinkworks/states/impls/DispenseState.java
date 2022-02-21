@@ -24,7 +24,38 @@ import java.util.Optional;
  */
 @Slf4j
 public class DispenseState implements IState {
-   /**
+
+    /**
+     *
+     */
+    @Override
+    public void getAction() { }
+
+    /**
+     *
+     * @param atmClientRequest atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest) { }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService) {  }
+
+    /**
+     *
+     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
+     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.
+     * @param atmService the atm service in the service layer, used for interactions with repositories account transactions.
+     */
+    @Override
+    public void getAction(AtmClientRequest atmClientRequest, IAccountService accountService, IAtmService atmService) { }
+
+    /**
     *
     * @param atmClientRequest Is the client's request. Encompasses the user's pin and the requested money.
     * @param accountService the account service in the service layer, used for interactions with repositories account transactions.

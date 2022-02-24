@@ -31,12 +31,15 @@ public class AtmDTO {
     // banknotes of fives
     private Integer five;
 
+    // description
+    private String description;
+
     /**
      * construct that can gets initialized through the atm entity
      * @param atm parameter
      */
     public AtmDTO(Atm atm){
-        this(atm.getId(), atm.getAtmAmount(), atm.getFifty(), atm.getTwenty(), atm.getTen(), atm.getFive());
+        this(atm.getId(), atm.getAtmAmount(), atm.getFifty(), atm.getTwenty(), atm.getTen(), atm.getFive(), atm.getDescription());
     }
 
     /**
@@ -45,7 +48,7 @@ public class AtmDTO {
      * @return Atm entity
      */
     public Atm toAtm(AtmDTO atmDTO){
-        return new Atm(atmDTO.getId(), atmDTO.getAtmAmount(), atmDTO.getFifty(), atmDTO.getTwenty(), atmDTO.getTen(), atmDTO.getFive());
+        return new Atm(atmDTO.getId(), atmDTO.getAtmAmount(), atmDTO.getFifty(), atmDTO.getTwenty(), atmDTO.getTen(), atmDTO.getFive(), atmDTO.getDescription());
     }
 
     /**
@@ -54,6 +57,6 @@ public class AtmDTO {
      * @return AtmDTO
      */
     public AtmDTO fromAtm(Atm atm){
-        return new AtmDTO(atm.getId(), atm.getAtmAmount(), atm.getFifty(), atm.getTwenty(), atm.getTen(), atm.getFive());
+        return new AtmDTO(atm.getId(), atm.getAtmAmount(), atm.getFifty(), atm.getTwenty(), atm.getTen(), atm.getFive(), atm.getDescription());
     }
 }

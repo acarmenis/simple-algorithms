@@ -36,6 +36,8 @@ public class Atm implements Serializable {
     private Integer ten;
     @Column
     private Integer five;
+    @Column
+    private String description;
 
     /**
      *
@@ -51,6 +53,15 @@ public class Atm implements Serializable {
         this.twenty = twenty;
         this.ten = ten;
         this.five = five;
+    }
+
+    public Atm(Integer atmAmount, Integer fifty, Integer twenty, Integer ten, Integer five, String description) {
+        this.atmAmount = atmAmount;
+        this.fifty = fifty;
+        this.twenty = twenty;
+        this.ten = ten;
+        this.five = five;
+        this.description = description;
     }
 
     /**

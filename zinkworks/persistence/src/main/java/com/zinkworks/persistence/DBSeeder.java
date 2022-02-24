@@ -50,7 +50,7 @@ public class DBSeeder implements CommandLineRunner {
         bankAccountRepo.deleteAllInBatch();
 
         // Create ATM instance
-        Atm atm = new Atm(1500, 10, 30, 30, 20);
+        Atm atm = new Atm(1500, 10, 30, 30, 20, "The atmAmount could be omitted. That money, can be calculated from the total of banknotes");
 
         // save atm
         atmRepository.save(atm);
@@ -58,8 +58,8 @@ public class DBSeeder implements CommandLineRunner {
 
         //  Create two Account instances and add accounts to a list
         List<Account> accounts = List.of(
-                  new Account(123456789L, "1234", 800, 200),
-                  new Account(987654321L, "4321", 1230, 150));
+                  new Account(123456789L, "1234", 800, 200, "123456789L User account"),
+                  new Account(987654321L, "4321", 1230, 150, "987654321L User account"));
 
         // save each account and its openBalance child
         // Save Parent Reference (which will save the child as well)

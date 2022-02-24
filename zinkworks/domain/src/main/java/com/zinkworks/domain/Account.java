@@ -38,6 +38,8 @@ public class Account implements Serializable {
     private Integer balance;
     @Column
     private Integer overDraft;
+    @Column
+    private String description;
 
     /**
      *
@@ -46,11 +48,12 @@ public class Account implements Serializable {
      * @param balance the account balance
      * @param overDraft the overdraft restrict dispense
      */
-    public Account(Long accountNumber, String pin, Integer balance, Integer overDraft) {
+    public Account(Long accountNumber, String pin, Integer balance, Integer overDraft, String description) {
         this.accountNumber = accountNumber;
         this.pin = pin;
         this.balance = balance;
         this.overDraft = overDraft;
+        this.description = description;
     }
 
     /**

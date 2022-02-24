@@ -28,12 +28,14 @@ public class AccountDTO {
     //overDraft
     private Integer overDraft;
 
+    private String description;
+
     /**
      * construct that can gets initialized through the Account entity
      * @param account parameter
      */
     public AccountDTO(Account account){
-        this(account.getId(), account.getAccountNumber(), account.getPin(), account.getBalance(), account.getOverDraft());
+        this(account.getId(), account.getAccountNumber(), account.getPin(), account.getBalance(), account.getOverDraft(), account.getDescription());
     }
 
     /**
@@ -42,7 +44,7 @@ public class AccountDTO {
      * @return Account
      */
     public Account ftoAccount(AccountDTO accountDTO){
-        return new Account(accountDTO.getId(), accountDTO.getAccountNumber(), accountDTO.getPin(), accountDTO.getBalance(), accountDTO.getOverDraft());
+        return new Account(accountDTO.getId(), accountDTO.getAccountNumber(), accountDTO.getPin(), accountDTO.getBalance(), accountDTO.getOverDraft(), accountDTO.getDescription());
     }
 
     /**
@@ -51,6 +53,6 @@ public class AccountDTO {
      * @return AccountDTO
      */
     public AccountDTO fromAccount(Account account){
-        return new AccountDTO(account.getId(), account.getAccountNumber(), account.getPin(), account.getBalance(), account.getOverDraft());
+        return new AccountDTO(account.getId(), account.getAccountNumber(), account.getPin(), account.getBalance(), account.getOverDraft(), account.getDescription());
     }
 }

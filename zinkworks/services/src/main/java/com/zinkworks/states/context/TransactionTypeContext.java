@@ -24,7 +24,9 @@ public class TransactionTypeContext implements IState {
      *
      */
     @Override
-    public void getAction() { }
+    public void getAction() {
+        this.transactionState.getAction();
+    }
 
     /**
      *

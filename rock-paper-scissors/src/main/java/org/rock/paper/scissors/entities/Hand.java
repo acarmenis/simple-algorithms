@@ -34,7 +34,7 @@ public abstract class Hand implements IHand {
        hands.add(new IHandDispatcher() {
            @Override
            public IntSupplier action() {
-               // returns -1,1 
+               // returns -1,1
                return action;
            }
 

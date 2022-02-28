@@ -41,7 +41,7 @@ extent.
 * Readable and ease to manage extensions.
 * Interface designs
 
-* Alternatives to hard-coded decisions with Using Dynamic Dispatching
+* Alternatives to hard-coded decisions with the Rules design pattern (Behavioral design pattern)
 * [Using Dynamic Dispatching](https://en.wikipedia.org/wiki/Dynamic_dispatch)
 * [Interface Callable<V>](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html)
 * [AtomicIntegerArray](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicIntegerArray.html)

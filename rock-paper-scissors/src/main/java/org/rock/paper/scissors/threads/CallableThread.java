@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 
 public class CallableThread implements Callable<GameWrapper> {
 
-    private GameWrapper gameWrapper;
+    private final GameWrapper gameWrapper;
 
     public CallableThread(GameWrapper gameWrapper) {
         this.gameWrapper = gameWrapper;

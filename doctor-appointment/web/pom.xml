@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>doctor-appointment</artifactId>
+        <groupId>com.doctor.appointment</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>web</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+        <maven.test.skip>true</maven.test.skip>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd-HH.mm.ss</maven.build.timestamp.format>
+        <swagger.version>3.0.0</swagger.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.doctor.appointment</groupId>
+            <artifactId>domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.doctor.appointment</groupId>
+            <artifactId>persistence</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.doctor.appointment</groupId>
+            <artifactId>service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+
+
+        <defaultGoal>install</defaultGoal>
+        <directory>${basedir}/target</directory>
+        <finalName>${rp.build.name}</finalName>
+
+        <!--  Allow Maven to manipulate resource files as a part of the build process. -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.doctor.com.doctor.appointment.web.app.DoctorAppointmentApplication</mainClass>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven.antrun.plugin.version}</version>
+
+                <executions>
+                    <execution>
+                        <id>antrun-plugin</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="activeProfile: ${activeProfile}"/>
+                                <echo message="basedir: ${basedir}"/>
+                                <echo message="Embed a line break: ${line.separator}"/>
+                                <echo message="Build dir: ${project.build.directory}" level="info"/>
+                                <echo message="project.build.outputDirectory: ${project.build.outputDirectory}" level="info"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+
+
+
+        </plugins>
+    </build>
+
+
+
+
+    <profiles>
+
+        <!-- development profile -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activeProfile>dev</activeProfile>
+                <rp.build.name>${activeProfile}-${project.artifactId}-${project.version}-${timestamp}</rp.build.name>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!-- test profile -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <activeProfile>test</activeProfile>
+                <rp.build.name>${activeProfile}-${project.artifactId}-${project.version}-${timestamp}</rp.build.name>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+
+    </profiles>
+
+
+
+
+</project>

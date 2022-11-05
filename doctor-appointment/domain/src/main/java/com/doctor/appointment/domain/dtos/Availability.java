@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class Availability {
+    private Long officeDoctorAvailabilityId;
     boolean availability;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date availabilityDate;

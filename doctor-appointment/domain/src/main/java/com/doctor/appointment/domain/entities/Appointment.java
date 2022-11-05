@@ -28,10 +28,10 @@ import java.util.Date;
 @Table(name= "APPOINTMENT",
         indexes = {
                 @Index(name = "INDEX_ON_APPOINTMENT", columnList = "id")
-        })/*,
+        },
         uniqueConstraints = {
                 @UniqueConstraint(name = "APPOINTMENT_UK1", columnNames = {"OFFICE_ID", "PATIENT_ID", "APPOINTMENT_ACTUAL_START_TIME"})
-        })*/
+        })
 @org.hibernate.annotations.Table(appliesTo = "appointment", comment = "APPOINTMENTS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Appointment extends BaseEntity {

@@ -17,7 +17,7 @@ import java.util.List;
 public interface IOfficeDoctorAvailabilityRepository extends IBaseEntityRepository<OfficeDoctorAvailability> {
 
     @Transactional
-    @Query( "SELECT new com.doctor.appointment.domain.dtos.Availability( oda.availability, oda.availabilityDate, oda.startTime, oda.endTime, oda.office.id, o.timeSlotPerClientInMinutes, d.id, o.hospital.id, d.contact.firstName, d.contact.lastName, sp.specialization.id, s.specializationName ) " +
+    @Query( "SELECT new com.doctor.appointment.domain.dtos.Availability( oda.id, oda.availability, oda.availabilityDate, oda.startTime, oda.endTime, oda.office.id, o.timeSlotPerClientInMinutes, d.id, o.hospital.id, d.contact.firstName, d.contact.lastName, sp.specialization.id, s.specializationName ) " +
             "FROM OfficeDoctorAvailability oda " +
             "JOIN Office o " +
             "ON o.id = oda.office.id " +

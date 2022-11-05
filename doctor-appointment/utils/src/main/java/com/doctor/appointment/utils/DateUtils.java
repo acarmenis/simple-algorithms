@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -34,6 +35,9 @@ public class DateUtils {
     // 2022-09-28
     private static final SimpleDateFormat sdf5 = new SimpleDateFormat("yyyy-MM-dd");
 
+    //  11:42.00
+    private static final SimpleDateFormat sdf6 = new SimpleDateFormat("HH:mm.ss");
+
     public static String getDateTime(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(sdf4.toPattern());
         return dateTimeFormatter.format(LocalDateTime.now());
@@ -56,6 +60,27 @@ public class DateUtils {
         return d;
     }
 
+    public static Date convertDateToDate(Date date) {
+        String strDate = sdf6.format(date);
+        System.out.println("Converted String: " + strDate);
+        return convertStringToDate(strDate);
+    }
+
+
+    public static Date convertDateToDate(Date date1, Date date2) {
+        Calendar cal = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        try {
+            cal2.setTime(date1);
+            cal.set(date1.getYear()+1900, date1.getMonth()+1, cal2.get(Calendar.DAY_OF_MONTH), date2.getHours(), date2.getMinutes(), date2.getSeconds());
+            String formatted = sdf6.format(cal.getTime());
+            System.out.println(formatted);
+        } catch (Exception e) {
+           log.error("Error in convertion of time: {} ", e.getMessage());
+        }
+        return cal.getTime();
+    }
+
     public static Date addDays(String date, int days) {
         Date d = null;
         String s = LocalDate.parse(date).plusDays(days).toString();
@@ -70,7 +95,7 @@ public class DateUtils {
     //Convert java.util.Date to java.time.LocalDate
     public static LocalDate dateToLocalDate(Date date){
         Instant instant = Instant.ofEpochMilli(date.getTime());
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate(); // LocalDate localDate =
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
 
     //Convert java.time.LocalDate to java.util.Date
@@ -99,7 +124,12 @@ public class DateUtils {
     }
 
 
-
+    // Convert java.util.Date + minutes to java.util.LocalDateTime
+    public static LocalDateTime dateToLocalDateTimePlusHoursMinutesSeconds(Date date1, Date date2){
+        Instant instant = Instant.ofEpochMilli(date1.getTime());
+        LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        return ldt.plusHours(date2.getHours()).plusMinutes(date2.getTime()).plusSeconds(date2.getTime());
+    }
 
 
 

@@ -98,8 +98,14 @@ public class OfficeDoctorAvailabilityService implements IGenericService<OfficeDo
         log.info("Into updateOne Doctor entity ..");
         OfficeDoctorAvailabilityDto retrievedOfficeDoctorAvailabilityDto = getOne(dto.getId());
         OfficeDoctorAvailability officeDoctorAvailability = MapperUtil.mapOne(retrievedOfficeDoctorAvailabilityDto, OfficeDoctorAvailability.class);
-        officeDoctorAvailability = officeDoctorAvailability.fromDto(dto);
-        officeDoctorAvailability = officeDoctorAvailabilityRepo.save(officeDoctorAvailability);
+        officeDoctorAvailability = officeDoctorAvailability.fromDto(officeDoctorAvailability, dto);
+        try {
+            officeDoctorAvailability = officeDoctorAvailabilityRepo.save(officeDoctorAvailability);
+        } catch(Exception e){
+            String message = AppUtil.buildMessage("OfficeDoctorAvailability "+e.getMessage());
+            log.error(message);
+            throw new ResourceNotFoundException(message);
+        }
         return MapperUtil.mapOne(officeDoctorAvailability, OfficeDoctorAvailabilityDto.class);
     }
 

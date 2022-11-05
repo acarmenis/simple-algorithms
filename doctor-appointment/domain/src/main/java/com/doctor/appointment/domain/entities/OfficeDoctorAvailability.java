@@ -33,7 +33,7 @@ import java.util.Date;
 @org.hibernate.annotations.Table(appliesTo = "doctor_office_availability", comment = "DOCTOR OFFICE AVAILABILITY")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OfficeDoctorAvailability extends BaseEntity {
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne//(cascade = CascadeType.MERGE)
     @JoinColumn(name = "OFFICE_ID", nullable = false, foreignKey=@ForeignKey(name = "OFFICE_FK"))
     @Comment("OFFICE PK")
     @JsonBackReference
@@ -55,27 +55,27 @@ public class OfficeDoctorAvailability extends BaseEntity {
     @Comment("UN AVAILABILITY REASON - IF SO")
     private String unAvailabilityReason;
 
-    public OfficeDoctorAvailability fromDto(OfficeDoctorAvailabilityDto officeDoctorAvailabilityDto){
+    public OfficeDoctorAvailability fromDto(OfficeDoctorAvailability officeDoctorAvailability, OfficeDoctorAvailabilityDto officeDoctorAvailabilityDto){
         if(officeDoctorAvailabilityDto.getId() != null){
-            this.id=officeDoctorAvailabilityDto.getId();
+            officeDoctorAvailability.id=officeDoctorAvailabilityDto.getId();
         }
         if(officeDoctorAvailabilityDto.getOffice() != null){
-            this.office=MapperUtil.mapOne(officeDoctorAvailabilityDto.getOffice(), Office.class);
+            officeDoctorAvailability.setOffice(MapperUtil.mapOne(officeDoctorAvailabilityDto.getOffice(), Office.class));
         }
         this.availability = officeDoctorAvailabilityDto.isAvailability();
         if(officeDoctorAvailabilityDto.getAvailabilityDate() != null){
-            this.availabilityDate = officeDoctorAvailabilityDto.getAvailabilityDate();
+            officeDoctorAvailability.setAvailabilityDate( officeDoctorAvailabilityDto.getAvailabilityDate());
         }
         if(officeDoctorAvailabilityDto.getStartTime() != null){
-            this.startTime = officeDoctorAvailabilityDto.getStartTime();
+            officeDoctorAvailability.setStartTime(officeDoctorAvailabilityDto.getStartTime());
         }
         if(officeDoctorAvailabilityDto.getEndTime() != null){
-            this.endTime = officeDoctorAvailabilityDto.getEndTime();
+            officeDoctorAvailability.setEndTime(officeDoctorAvailabilityDto.getEndTime());
         }
         if(officeDoctorAvailabilityDto.getUnAvailabilityReason() != null){
-            this.unAvailabilityReason = officeDoctorAvailabilityDto.getUnAvailabilityReason();
+            officeDoctorAvailability.setUnAvailabilityReason(officeDoctorAvailabilityDto.getUnAvailabilityReason());
         }
-        return this;
+        return officeDoctorAvailability;
     }
 
 }

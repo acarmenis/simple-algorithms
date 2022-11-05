@@ -107,25 +107,23 @@ http://localhost:8080/backend/api/v1/booking/book-appointment
 
 { 
     "patientId":1,
-    "availability":  {
-    "availability": true,
-    "availabilityDate": "2022-11-12",
-    "startTime": "01:31:08",
-    "endTime": "02:11:08",
-    "officeId": 2,
-    "timeSlotPerClientInMinutes": 40,
-    "doctorId": 2,
-    "hospitalId": 2,
-    "firstName": "Fouad",
-    "lastName": "Abbas",
-    "doctorSpecializationId": 5,
-    "doctorSpecializationName": "Dermatologist"
-    }
+        "availability":  {
+        "availability": true,
+        "availabilityDate": "2022-11-12",
+        "startTime": "01:31:08",
+        "endTime": "02:11:08",
+        "officeId": 2,
+        "timeSlotPerClientInMinutes": 40,
+        "doctorId": 2,
+        "hospitalId": 2,
+        "firstName": "Fouad",
+        "lastName": "Abbas",
+        "doctorSpecializationId": 5,
+        "doctorSpecializationName": "Dermatologist"
+        }
 }
 
 
-**** The application currently saves the new appointment but for some reason, it does it twice.
-It was eliminated this bug  by using the constrains but after saving just one appointment, it throws an response error sayin that exactly.
-Currently it works without the constrain, which is commented but if desired to activate - uncomment the constrain to that entity will have the chance to see that it just saves once.
-Due to limit of the time, I couldn't search / debug more due to handover deadlines - willing though to help if 
-any question arises out there for any concern.
+### For access to database for the dev env, please, have a look at the dev properties 
+ * there are the necessary info for db connectivity. The same applies for the test env too.
+

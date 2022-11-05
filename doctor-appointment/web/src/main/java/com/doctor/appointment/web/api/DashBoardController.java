@@ -48,7 +48,6 @@ public class DashBoardController {
     @ApiOperation(nickname = "bookAnAppointment", value = "Booking an available appointment for enrolled patient, a hospital and for a specialization")
     @PostMapping(value = {"/book-appointment" })
     public ResponseEntity<?> bookingAppointment(@RequestBody AddAppointmentRequest addAppointmentRequest ){
-        appointmentService.bookAppointmentFor(addAppointmentRequest);
         return ResponseEntity.ok(appointmentService.bookAppointmentFor(addAppointmentRequest));
     }
 

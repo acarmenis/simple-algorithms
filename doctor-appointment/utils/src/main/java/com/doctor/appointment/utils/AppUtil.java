@@ -17,4 +17,8 @@ public class AppUtil {
     public static String buildMessage(String entity){
         return entity.concat(" ").concat(", didn't get retrieved from database!");
     }
+
+    public static String buildBadExceptionMessage(String entity){
+        return entity.concat(" ").concat(", request, is not in a proper state!");
+    }
 }

@@ -81,6 +81,19 @@ public class DateUtils {
         return cal.getTime();
     }
 
+    public static Date addDaysToDate(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(date);
+            c.add(Calendar.DATE, days);
+            String formatted = sdf5.format(c.getTime());
+            System.out.println(formatted);
+        } catch (Exception e) {
+            log.error("Error in conversion of convertDayToDate: {} ", e.getMessage());
+        }
+        return c.getTime();
+    }
+
     public static Date addDays(String date, int days) {
         Date d = null;
         String s = LocalDate.parse(date).plusDays(days).toString();

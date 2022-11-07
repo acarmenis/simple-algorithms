@@ -8,6 +8,7 @@ import com.doctor.appointment.service.signatures.IAppointmentService;
 import com.doctor.appointment.service.signatures.IGenericService;
 import com.doctor.appointment.utils.AppUtil;
 import com.doctor.appointment.utils.DateUtils;
+import com.doctor.appointment.utils.errors.BadRequestException;
 import com.doctor.appointment.utils.errors.ResourceNotFoundException;
 import com.doctor.appointment.utils.mappers.MapperUtil;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -36,6 +36,7 @@ import static com.doctor.appointment.utils.IApConstant.ALREADY_BOOKED;
 @Service
 public class AppointmentService implements IGenericService<AppointmentDto>, IAppointmentService {
 
+    private static final int DAYS = 1;
     private IAppointmentRepository appointmentRepo;
     private PatientService patientService;
     private OfficeService officeService;
@@ -150,25 +151,21 @@ public class AppointmentService implements IGenericService<AppointmentDto>, IApp
      */
     @Override
     public AppointmentDto bookAppointmentFor(AddAppointmentRequest addAppointmentRequest) {
-
+            if ((addAppointmentRequest == null ) ||
+                    (addAppointmentRequest.getPatientId() == null) ||
+                    (addAppointmentRequest.getAvailability() == null) ||
+                    (addAppointmentRequest.getAvailability().getOfficeDoctorAvailabilityId() == null)){
+                    String message = AppUtil.buildBadExceptionMessage("AddAppointmentRequest");
+                    log.error(message);
+                    throw new BadRequestException(message);
+            }
             PatientDto patientDto = patientService.getOne(addAppointmentRequest.getPatientId());
             OfficeDto officeDto = officeService.getOne(addAppointmentRequest.getAvailability().getOfficeId());
-            OfficeDoctorAvailabilityDto officeDoctorAvailabilityDto = null;
-            if (addAppointmentRequest.getAvailability().getOfficeDoctorAvailabilityId() != null){
-                officeDoctorAvailabilityDto = officeDoctorAvailabilityService.getOne(addAppointmentRequest.getAvailability().getOfficeDoctorAvailabilityId());
-                officeDoctorAvailabilityDto.setOffice(officeDto);
-                officeDoctorAvailabilityDto.setUnAvailabilityReason(ALREADY_BOOKED);
-                officeDoctorAvailabilityService.updateOne(officeDoctorAvailabilityDto);
-            } else {
-                officeDoctorAvailabilityDto = new OfficeDoctorAvailabilityDto();
-                officeDoctorAvailabilityDto.setAvailability(Boolean.FALSE);
-                officeDoctorAvailabilityDto.setOffice(officeDto);
-                officeDoctorAvailabilityDto.setAvailabilityDate(addAppointmentRequest.getAvailability().getAvailabilityDate());
-                officeDoctorAvailabilityDto.setUnAvailabilityReason(ALREADY_BOOKED);
-                officeDoctorAvailabilityDto.setStartTime(addAppointmentRequest.getAvailability().getStartTime());
-                officeDoctorAvailabilityDto.setEndTime(addAppointmentRequest.getAvailability().getEndTime());
-                officeDoctorAvailabilityService.createOne(officeDoctorAvailabilityDto);
-            }
+
+            OfficeDoctorAvailabilityDto officeDoctorAvailabilityDto = officeDoctorAvailabilityService.getOne(addAppointmentRequest.getAvailability().getOfficeDoctorAvailabilityId());
+            officeDoctorAvailabilityDto.setOffice(officeDto);
+            officeDoctorAvailabilityDto.setUnAvailabilityReason(ALREADY_BOOKED);
+            officeDoctorAvailabilityService.updateOne(officeDoctorAvailabilityDto);
 
             AppointmentDto appointment = new AppointmentDto();
             appointment.setAppointmentStatus(appointmentStatusService.findByState(AppointmentState.BOOKED));
@@ -186,7 +183,7 @@ public class AppointmentService implements IGenericService<AppointmentDto>, IApp
                             officeDoctorAvailabilityDto.getEndTime())
             );
             appointment.setPatient(patientDto);
-            appointment.setBookedDate(new Date());
+            appointment.setBookedDate(DateUtils.addDaysToDate(addAppointmentRequest.getAvailability().getAvailabilityDate(), DAYS));
             Appointment a = MapperUtil.mapOne(appointment, Appointment.class);
          return MapperUtil.mapOne(appointmentRepo.save(a), AppointmentDto.class);
     }

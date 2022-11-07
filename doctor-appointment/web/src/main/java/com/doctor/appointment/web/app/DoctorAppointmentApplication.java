@@ -511,6 +511,10 @@ public class DoctorAppointmentApplication implements CommandLineRunner {
         seeingADoctorService.createAll(seeingADoctors);
         // select * from seeing_a_doctor;
 
+        log.info("* ------------------------------------------------------------------------------------------- *");
+        log.info("Database is fully instantiated and ready to be used by the application!");
+        log.info("* ------------------------------------------------------------------------------------------- *");
+
         /**
          * Please, run these queries in the database only after the application is up and running.
          * -------------------------------------------------------------------------------------------

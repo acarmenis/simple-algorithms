@@ -9,6 +9,7 @@ pipeline {
       
       steps {
             echo 'building the application'
+            echo 'building automated by jenkins listening to changes periodically - the application'
       }  
     
     }   

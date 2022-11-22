@@ -9,7 +9,7 @@ pipeline {
       
       steps {
             echo 'building the application'
-            echo 'building automated by jenkins listening to changes periodically - the application'
+            echo 'building automated by jenkins listening to changes periodically'
       }  
     
     }   
@@ -19,7 +19,7 @@ pipeline {
       
       steps {
             echo 'testing the application' 
-            echo 'testing automated by jenkins listening to changes periodically - the application'
+            echo 'testing automated by jenkins listening to changes periodically'
       }  
     
     }  
@@ -30,7 +30,7 @@ pipeline {
       
       steps {
            echo 'deployting the application'  
-            echo 'deployting automated by jenkins listening to changes periodically - the application'
+            echo 'deployting automated by jenkins listening to changes periodically'
       }  
     
     }  

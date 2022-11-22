@@ -19,6 +19,7 @@ pipeline {
       
       steps {
             echo 'testing the application' 
+            echo 'testing automated by jenkins listening to changes periodically - the application'
       }  
     
     }  
@@ -28,7 +29,8 @@ pipeline {
     stage("deploy"){
       
       steps {
-           echo 'deployting the application'   
+           echo 'deployting the application'  
+            echo 'deployting automated by jenkins listening to changes periodically - the application'
       }  
     
     }  

@@ -10,6 +10,7 @@ pipeline {
       steps {
             echo 'building the application'
             echo 'building automated by jenkins listening to changes periodically!'
+            echo 'building new run build'
       }  
     
     }   
@@ -20,6 +21,7 @@ pipeline {
       steps {
             echo 'testing the application' 
             echo 'testing automated by jenkins listening to changes periodically!'
+          echo 'building new run test'
       }  
     
     }  
@@ -31,6 +33,7 @@ pipeline {
       steps {
            echo 'deployting the application'  
             echo 'deployting automated by jenkins listening to changes periodically!'
+          echo 'building new run deploy'
       }  
     
     }  
